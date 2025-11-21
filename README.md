@@ -128,6 +128,25 @@ result = model.fit()
 
 # Print results
 print(result.summary())
+
+Optimization terminated successfully.
+         Current function value: 0.488047
+         Iterations 6
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:      MILESTONE_JOB_OUT   No. Observations:                96324
+Model:                          Logit   Df Residuals:                    96322
+Method:                           MLE   Df Model:                            1
+Date:                Fri, 07 Nov 2025   Pseudo R-squ.:                 0.03922
+Time:                        13:50:00   Log-Likelihood:                -47011.
+converged:                       True   LL-Null:                       -48929.
+Covariance Type:            nonrobust   LLR p-value:                     0.000
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -1.0551      0.009   -117.988      0.000      -1.073      -1.038
+Mandated      -1.2034      0.021    -56.352      0.000      -1.245      -1.162
+==============================================================================
 ```
 
 </details>
