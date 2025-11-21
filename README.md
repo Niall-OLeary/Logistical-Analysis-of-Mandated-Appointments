@@ -105,6 +105,32 @@ group by 1,2,3,4,5,6,7
    - I employed two logistic regression models to evaluate the effect of mandatory attendance on program outcomes and attendance rates.
    - The independent variable in both models was Mandated (mandatory vs. voluntary).
    - The dependant variables were Job_Outcome and Attendance_Improvement.
+<details> 
+<summary><strong>Regression Model Python Script</strong></summary>
+   
+```python
+import pandas as pd
+import statsmodels.api as sm
+
+# Load your data
+df = pd.read_csv(r'C:\Users\Niall.OLeary\Downloads\Mandation Testing - milestones.csv')
+
+# Define dependent and independent variables
+y = df['MILESTONE_JOB_OUT']                # Outcome (0 or 1)
+X = df[['Mandated']]                 # Predictor (0 or 1)
+
+# Add a constant (intercept term)
+X = sm.add_constant(X)
+
+# Fit logistic regression model
+model = sm.Logit(y, X)
+result = model.fit()
+
+# Print results
+print(result.summary())
+```
+
+</details>
 
 ## Outcome
 
