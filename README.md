@@ -11,15 +11,16 @@ Within our programme (and many others) attendance plays a key role in ensuring p
 
 To address this question, we conducted a logistic regression analysis using Python to evaluate the relationship between attendance mandates and programme success. The key steps involved were:
 
-1. Data Collection & Cleaning
+1. Data Collection & Cleaning  
 The dataset consists of two groups:
-  A. **Mandated Group**: This group consists of participants who were required to attend appointments. Attendance for this group was calculated both **before** and **after** the implementation of the mandatory     attendance policy.
 
-  B. **Control Group**: This group consists of participants who were not subject to the mandatory attendance policy (i.e. voluntary attendance). Attendance for this group was calculated separately for each         **half** of the program duration (12 months), allowing for a comparison of attendance over time.
+A. **Mandated Group**: This group consists of participants who were required to attend appointments. Attendance for this group was calculated both **before** and **after** the implementation of the mandatory     attendance policy.  
+
+B. **Control Group**: This group consists of participants who were not subject to the mandatory attendance policy (i.e. voluntary attendance). Attendance for this group was calculated separately for each         **half** of the program duration (12 months), allowing for a comparison of attendance over time.  
 
 For both groups, two binary columns were calculated:
-  Column 1: 0 = participant's attendance rate decreased or stayed the same, 1 = attendance rate **improved**.
-  Column 2: 0 = participant did not reach a Job Outcome, 1 = participant **did** reach a Job Outcome.
+   - Column 1: 0 = participant's attendance rate decreased or stayed the same, 1 = attendance rate **improved**.
+   - Column 2: 0 = participant did not reach a Job Outcome, 1 = participant **did** reach a Job Outcome.
 <details> 
 <summary><strong>Data Collection Script</strong></summary>
    
