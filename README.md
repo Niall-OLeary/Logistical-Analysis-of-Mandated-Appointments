@@ -3,20 +3,20 @@
 ## Business Question
 
 The core question of this analysis is:  
-**What effect does mandating appointment attendance have on participant's attendance and programme outcome (whether a participant reaches their final milestone)?**
+**What effect does mandating appointment attendance have on a participant's attendance and programme outcome (whether a participant a Job Outcome)?**
 
-Within our programme (and many others) attendance plays a key role in ensuring participants fully engage with the content and receive the intended benefits. If a participant fails to attend appointments, we can mandate them - making attendance mandatory and continuing non-attendance leads to a loss of benefits. The question arises as to whether enforcing mandatory attendance increases participant involvement and improves the program's overall success. This analysis aimed to answer this question by evaluating attendance patterns and program outcomes before and after the implementation of mandatory attendance policies.
+Within our programme (and many others) attendance plays a key role in ensuring participants fully engage with the content and receive the intended benefits. If a participant fails to attend appointments, we can mandate them - making attendance mandatory and continuing non-attendance leads to a loss of benefits. The question arises as to whether enforcing mandatory attendance increases participant involvement and improves the programme's overall success. This analysis aimed to answer this question by evaluating attendance patterns and programme outcomes before and after the implementation of mandatory attendance policies.
 
 ## Solution
 
-To address this question, we conducted a logistic regression analysis using Python to evaluate the relationship between attendance mandates and programme success. The key steps involved were:
+To address this question, I conducted a logistic regression analysis using Python to evaluate the relationship between attendance mandates, programme success and attendance rate improvement. The key steps involved were:
 
 1. Data Collection & Cleaning  
 The dataset consists of two groups:
 
 A. **Mandated Group**: This group consists of participants who were required to attend appointments. Attendance for this group was calculated both **before** and **after** the implementation of the mandatory     attendance policy.  
 
-B. **Control Group**: This group consists of participants who were not subject to the mandatory attendance policy (i.e. voluntary attendance). Attendance for this group was calculated separately for each         **half** of the program duration (12 months), allowing for a comparison of attendance over time.  
+B. **Control Group**: This group consists of participants who were not subject to the mandatory attendance policy (i.e. voluntary attendance). Attendance for this group was calculated separately for each         **half** of the programme duration (12 months), allowing for a comparison of attendance improvement.  
 
 For both groups, two binary columns were calculated:
    - Column 1: 0 = participant's attendance rate decreased or stayed the same, 1 = attendance rate **improved**.
@@ -102,7 +102,7 @@ group by 1,2,3,4,5,6,7
 </details>
 
 2. **Logistic Regression Model**:
-   - I employed two logistic regression models to evaluate the effect of mandatory attendance on program outcomes and attendance rates.
+   - I employed two logistic regression models to evaluate the effect of mandatory attendance on programme outcomes and attendance rates.
    - The independent variable in both models was Mandated (mandatory vs. voluntary).
    - The dependant variables were Job_Outcome and Attendance_Improvement.
 <details> 
@@ -116,7 +116,7 @@ import statsmodels.api as sm
 df = pd.read_csv(r'C:\Users\Niall.OLeary\Downloads\Mandation Testing - milestones.csv')
 
 # Define dependent and independent variables
-y = df['MILESTONE_JOB_OUT']                # Outcome (0 or 1)
+y = df['Job_Outcome']                # Outcome (0 or 1)
 X = df[['Mandated']]                 # Predictor (0 or 1)
 
 # Add a constant (intercept term)
@@ -147,13 +147,55 @@ Covariance Type:            nonrobust   LLR p-value:                     0.000
 const         -1.0551      0.009   -117.988      0.000      -1.073      -1.038
 Mandated      -1.2034      0.021    -56.352      0.000      -1.245      -1.162
 ==============================================================================
+
+----------------------------------------------------------------------------------------------------
+import pandas as pd
+import statsmodels.api as sm
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load your data
+df = pd.read_csv(r'C:\Users\Niall.OLeary\Downloads\Mandation Testing - attendance.csv')
+
+# Define dependent and independent variables
+y = df['ATTENDANCE_IMPROVEMENT']                # Outcome (0 or 1)
+X = df[['MANDATED']]                 # Predictor (0 or 1)
+
+# Add a constant (intercept term)
+X = sm.add_constant(X)
+
+# Fit logistic regression model
+model = sm.Logit(y, X)
+result = model.fit()
+
+# Print results
+print(result.summary())
+
+Optimization terminated successfully.
+         Current function value: 0.616038
+         Iterations 5
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:            IMPROVEMENT   No. Observations:                61282
+Model:                          Logit   Df Residuals:                    61280
+Method:                           MLE   Df Model:                            1
+Date:                Fri, 07 Nov 2025   Pseudo R-squ.:                0.002229
+Time:                        13:47:00   Log-Likelihood:                -37752.
+converged:                       True   LL-Null:                       -37836.
+Covariance Type:            nonrobust   LLR p-value:                 1.456e-38
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -0.7134      0.011    -62.704      0.000      -0.736      -0.691
+MANDATED      -0.2309      0.018    -12.943      0.000      -0.266      -0.196
+==============================================================================
 ```
 
 </details>
 
 ## Outcome
 
-The logistic regression analysis revealed several key findings:
+The logistical regression analysis revealed several key findings:
 
 - **Attendance Rate**: The coefficient for the mandated variable is -0.2309, indicating that participants in the mandated group were less likely to show an improvement in attendance compared to participants in the control group. The p-value for MANDATED is 0.000, indicating that the effect of mandatory attendance on attendance improvement is statistically significant. The Pseudo R-squared value is 0.002229, suggesting that the model explains a very small proportion of the variation in the outcome
   
@@ -164,6 +206,6 @@ The logistic regression analysis revealed several key findings:
 
 Mandating appointments does not appear to be an effective intervention for re-engaging participants who have previously failed to attend, nor does it increase the likelihood a participant achieves a Job Outcome. Participants who are forced to attend may feel bitter or less motivated, which could negatively impact their performance and attendance. The data suggest that alternative strategies should be considered for participants who miss voluntary appointments, as mandation alone often fails to improve attendance and may even worsen it (15% decrease on average).
 
-I could not conclusively attribute this result solely to the mandatory attendance policy. There are several factors that could be influencing these outcomes, such as the nature of the programme itself. Voluntary participants may be more intrinsically motivated, leading to higher engagement and better outcomes. Mandated participants may have differing support needs, which we may not be addressing, and therefore, we might mistakenly interpret non-attendance as a lack of motivation or commitment. In reality, these participants may face barriers such as logistical challenges, lack of engagement with the program content, or even external factors (e.g. personal or financial difficulties) that are preventing their attendance.
+I could not conclusively attribute this result solely to the mandatory attendance policy. There are several factors that could be influencing these outcomes, such as the nature of the programme itself. Voluntary participants may be more intrinsically motivated, leading to higher engagement and better outcomes. Mandated participants may have differing support needs, which we may not be addressing, and therefore, we might mistakenly interpret non-attendance as a lack of motivation or commitment. In reality, these participants may face barriers such as logistical challenges, lack of engagement with the programme content, or even external factors (e.g. personal or financial difficulties) that are preventing their attendance.
 
-Due to the low Pseudo R-squared value of both tests, it may be worthwhile to explore additional variables that could explain more of the variation in attendance improvement and Job Outcomes.
+Due to the low Pseudo R-squared value of both tests, it may be worthwhile to explore additional variables that could explain more of the variation in Attendance Improvement and Job Outcomes.
