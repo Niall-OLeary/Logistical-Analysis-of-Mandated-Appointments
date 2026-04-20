@@ -1,4 +1,4 @@
-# Logistical-Analysis-of-Mandated-Appointments
+# Logistical Analysis of Mandated Appointments
 
 ## Business Question
 
