@@ -3,7 +3,7 @@
 ## Business Question
 
 The core question of this analysis is:  
-**What effect does mandating appointment attendance have on a participant's attendance and programme outcome (whether a participant a Job Outcome)?**
+**What effect does mandating appointment attendance have on a participant's attendance and programme outcome (whether a participant achieves a Job Outcome)?**
 
 Within our programme (and many others) attendance plays a key role in ensuring participants fully engage with the content and receive the intended benefits. If a participant fails to attend appointments, we can mandate them - making attendance mandatory and continuing non-attendance leads to a loss of benefits. The question arises as to whether enforcing mandatory attendance increases participant involvement and improves the programme's overall success. This analysis aimed to answer this question by evaluating attendance patterns and programme outcomes before and after the implementation of mandatory attendance policies.
 
